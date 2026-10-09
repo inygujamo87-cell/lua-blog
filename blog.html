@@ -1,0 +1,1018 @@
+<!--
+Sénior — site proprietário.
+© 2026 Sénior. Todos os direitos reservados.
+Código fechado — uso, cópia ou redistribuição não autorizados são proibidos.
+Alterações apenas a partir do ficheiro HTML oficial.
+-->
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Sénior · Inyluar">
+<meta name="copyright" content="© 2026 Sénior. Todos os direitos reservados.">
+<meta name="robots" content="noarchive">
+<title>Sénior — Do júnior ao sénior, um artigo de cada vez</title>
+<meta name="description" content="Sénior é o espaço de Inyluar para pensar com clareza sobre programação, carreira e arquitetura de software.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%233a3a3a'/><stop offset='1' stop-color='%230a0a0a'/></linearGradient></defs><ellipse cx='50' cy='54' rx='46' ry='9' fill='none' stroke='%230a0a0a' stroke-width='4' transform='rotate(-22 50 52)' opacity='.45'/><circle cx='50' cy='50' r='28' fill='url(%23g)'/><path d='M4 66 Q50 44 96 40' stroke='%230a0a0a' stroke-width='5' fill='none' stroke-linecap='round'/></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#FBFAF7; --surface:#FFFFFF; --text:#1A1A18; --text-dim:#6B675F;
+--border:#E7E3DA; --accent:#A9782E; --accent-dim:#F3EADA;
+--ink:#101010; --radius:3px; --glass-blur:0px;
+--blob-1:transparent; --blob-2:transparent; --blob-3:transparent;
+--gap:26px; --pad:22px;
+}
+html{font-size:16px;} html.fs-sm{font-size:14px;} html.fs-lg{font-size:18px;}
+body.theme-glass{
+--bg:#100E1C; --surface:rgba(255,255,255,0.07); --text:#F4F1EA;
+--text-dim:#B7AFC9; --border:rgba(255,255,255,0.15);
+--accent-dim:rgba(212,175,110,0.18); --ink:#F4F1EA;
+--radius:20px; --glass-blur:20px;
+--blob-1:#6C5CE7; --blob-2:#D4AF6E; --blob-3:#3FC1C9;
+}
+body.theme-glass .btn-primary{color:#100E1C;}
+body.theme-glass .cat-pill.active,
+body.theme-glass .guide-tabs button.active{color:#100E1C;}
+body.accent-gold{--accent:#A9782E;} body.accent-blue{--accent:#3155C4;}
+body.accent-green{--accent:#1F8A5C;} body.accent-purple{--accent:#6A45D6;}
+body.accent-pink{--accent:#C23A6C;}
+body.theme-glass.accent-gold{--accent:#E3BE7C;}
+body.theme-glass.accent-blue{--accent:#8FAEFF;}
+body.theme-glass.accent-green{--accent:#6BE0AC;}
+body.theme-glass.accent-purple{--accent:#B79CFF;}
+body.theme-glass.accent-pink{--accent:#FF95BC;}
+body.density-compact{--gap:16px;--pad:14px;}
+body.density-comfy{--gap:26px;--pad:22px;}
+body.density-spacious{--gap:36px;--pad:30px;}
+
+.blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:0;transition:opacity .6s ease;z-index:0;pointer-events:none;}
+body.theme-glass .blob{opacity:.45;}
+.blob-a{width:460px;height:460px;background:var(--blob-1);top:-140px;left:-100px;}
+.blob-b{width:400px;height:400px;background:var(--blob-2);top:280px;right:-120px;}
+.blob-c{width:500px;height:500px;background:var(--blob-3);bottom:-200px;left:35%;}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.5;transition:background .35s ease,color .35s ease;user-select:none;-webkit-user-select:none;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;pointer-events:none;-webkit-user-drag:none;}
+h1,h2,h3{font-family:'Lora',serif;font-weight:700;letter-spacing:-0.01em;margin:0;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+header{border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(251,250,247,0.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:20;transition:background .35s ease;}
+body.theme-glass header{background:rgba(16,14,28,0.7);}
+.header-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.brand img,.brand svg{width:36px;height:36px;flex-shrink:0;}
+.brand-name{font-family:'Lora',serif;font-weight:700;font-size:1.25rem;letter-spacing:-0.01em;}
+.brand-name em{font-style:normal;color:var(--accent);}
+.menu-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:all .2s ease;}
+.menu-btn:hover{border-color:var(--accent);}
+.menu-btn:active{transform:scale(.94);}
+.menu-btn span{display:block;width:16px;height:2px;background:currentColor;position:relative;}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:16px;height:2px;background:currentColor;}
+.menu-btn span::before{top:-5px;} .menu-btn span::after{top:5px;}
+
+.overlay{position:fixed;inset:0;background:rgba(10,10,10,0.35);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:40;backdrop-filter:blur(2px);}
+.overlay.open{opacity:1;pointer-events:auto;}
+.drawer{position:fixed;top:0;right:0;height:100vh;width:320px;max-width:88vw;background:var(--surface);border-left:1px solid var(--border);box-shadow:-8px 0 30px rgba(0,0,0,0.15);transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);z-index:41;overflow-y:auto;backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));}
+.drawer.open{transform:translateX(0);}
+.drawer-inner{padding:22px;display:flex;flex-direction:column;gap:26px;min-height:100%;}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;}
+.drawer-head strong{font-family:'Lora',serif;font-size:1.05rem;}
+.close-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-size:1rem;}
+.close-btn:hover{border-color:var(--accent);color:var(--accent);}
+.drawer-group h4{margin:0 0 10px;font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:var(--text-dim);font-weight:700;}
+.drawer-group{border-top:1px solid var(--border);padding-top:18px;}
+.drawer-group:first-child{border-top:none;padding-top:0;}
+.drawer-link{display:block;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:.92rem;margin-bottom:2px;transition:all .2s ease;}
+.drawer-link:hover{background:var(--accent-dim);color:var(--accent);}
+.drawer-row{margin-bottom:16px;}
+.drawer-label{font-size:.8rem;color:var(--text-dim);margin-bottom:8px;display:block;}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{padding:6px 12px;border-radius:20px;border:1px solid var(--border);font-size:.78rem;cursor:pointer;background:transparent;color:var(--text);transition:all .2s ease;}
+.pill:hover{border-color:var(--accent);}
+.pill.active{background:var(--ink);border-color:var(--ink);color:var(--bg);}
+.swatch-row{display:flex;gap:10px;}
+.swatch-btn{width:24px;height:24px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;transition:transform .15s ease;}
+.swatch-btn:hover{transform:scale(1.12);}
+.swatch-btn.active{border-color:var(--text);}
+.sw-gold{background:#A9782E;} .sw-blue{background:#3155C4;} .sw-green{background:#1F8A5C;} .sw-purple{background:#6A45D6;} .sw-pink{background:#C23A6C;}
+.theme-option{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-bottom:4px;border:1px solid transparent;}
+.theme-option:hover{background:var(--accent-dim);}
+.theme-option.active{border-color:var(--accent);background:var(--accent-dim);}
+.swatch{width:16px;height:16px;border-radius:50%;flex-shrink:0;}
+.swatch.mini-clean{background:linear-gradient(135deg,#FBFAF7,#A9782E);}
+.swatch.mini-glass{background:linear-gradient(135deg,#6C5CE7,#3FC1C9);}
+.drawer-footer{margin-top:auto;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;}
+.icon-btn{width:30px;height:30px;border-radius:50%;border:none;background:transparent;color:var(--text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.55;transition:all .2s ease;}
+.icon-btn:hover{opacity:1;color:var(--accent);}
+
+.screen{display:none;animation:fadeIn .35s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.hero{padding:74px 0 60px;text-align:center;border-bottom:1px solid var(--border);}
+.hero .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px;}
+.hero h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.16;max-width:16ch;margin:0 auto 20px;}
+.hero p{color:var(--text-dim);font-size:1.05rem;max-width:52ch;margin:0 auto 30px;line-height:1.65;}
+.hero-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+.btn{display:inline-block;padding:13px 26px;border-radius:3px;font-size:.9rem;font-weight:600;cursor:pointer;border:1px solid transparent;font-family:inherit;transition:all .2s ease;}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{background:var(--accent);}
+.btn-ghost{border-color:var(--border);color:var(--text);background:transparent;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+.cat-section{padding:50px 0 10px;}
+.cat-heading{text-align:center;margin-bottom:26px;}
+.cat-heading .eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);font-weight:600;}
+.cat-heading h2{font-size:1.5rem;margin-top:8px;}
+.cat-row{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding-bottom:20px;}
+.cat-pill{border:1px solid var(--border);background:var(--surface);padding:9px 18px;border-radius:30px;font-size:.85rem;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.2;color:var(--text);font-family:inherit;transition:all .2s ease;}
+.cat-pill span{display:block;font-size:.68rem;font-weight:400;color:var(--text-dim);margin-top:1px;}
+.cat-pill:hover{border-color:var(--accent);}
+.cat-pill.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+.cat-pill.active span{color:#D8CBB5;}
+
+.articles{padding:20px 0 70px;}
+.article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);}
+.article-card{border-bottom:1px solid var(--border);padding-bottom:var(--pad);display:flex;flex-direction:column;gap:10px;transition:transform .25s ease;}
+.article-card:hover{transform:translateY(-3px);}
+.article-tag{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+.article-card h3{font-size:1.12rem;line-height:1.35;}
+.article-card p{margin:0;color:var(--text-dim);font-size:.9rem;line-height:1.55;}
+.article-meta{font-size:.76rem;color:var(--text-dim);display:flex;gap:10px;margin-top:2px;}
+.hidden-card{display:none;}
+
+/* ===== GUIA ===== */
+.guide-hero{padding:60px 0 30px;text-align:center;border-bottom:1px solid var(--border);}
+.guide-hero .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px;}
+.guide-hero h1{font-size:clamp(1.8rem,3.6vw,2.6rem);margin:0 auto 14px;max-width:20ch;}
+.guide-hero p{color:var(--text-dim);max-width:56ch;margin:0 auto;line-height:1.6;}
+.guide-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:26px 0 0;}
+.guide-tabs button{padding:9px 18px;border-radius:30px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s ease;}
+.guide-tabs button:hover{border-color:var(--accent);}
+.guide-tabs button.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+.guide-body{padding:30px 0 70px;}
+.guide-panel{display:none;animation:fadeIn .3s ease;}
+.guide-panel.active{display:block;}
+.guide-panel h2{font-size:1.5rem;margin:0 0 14px;}
+.guide-panel h3{font-size:1.12rem;margin:28px 0 10px;color:var(--accent);}
+.guide-panel p{color:var(--text-dim);line-height:1.7;margin:0 0 14px;}
+.guide-panel p strong{color:var(--text);}
+.guide-panel ul{padding-left:22px;color:var(--text-dim);line-height:1.75;margin:0 0 14px;}
+.guide-panel li{margin-bottom:6px;}
+.guide-table{width:100%;border-collapse:collapse;margin:14px 0 24px;font-size:.88rem;background:var(--surface);border-radius:8px;overflow:hidden;}
+.guide-table th,.guide-table td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top;}
+.guide-table th{background:var(--accent-dim);color:var(--text);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;}
+.guide-table td:first-child{font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:500;white-space:nowrap;}
+.guide-table tr:last-child td{border-bottom:none;}
+.guide-code{background:#0d1117;color:#e6edf3;border-radius:8px;padding:18px 20px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.6;margin:14px 0 24px;border:1px solid rgba(255,255,255,0.08);white-space:pre;user-select:text;-webkit-user-select:text;}
+.guide-code .k{color:#ff7b72;} .guide-code .s{color:#a5d6ff;} .guide-code .c{color:#8b949e;font-style:italic;} .guide-code .n{color:#79c0ff;}
+.guide-tip{background:var(--accent-dim);border-left:3px solid var(--accent);padding:14px 18px;border-radius:6px;margin:18px 0;font-size:.9rem;color:var(--text);}
+.guide-tip strong{color:var(--accent);}
+
+.about{padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);}
+.about-inner{display:grid;grid-template-columns:1fr 1.3fr;gap:50px;align-items:center;}
+.about-logo{display:flex;align-items:center;justify-content:center;}
+.about-logo svg{width:170px;height:170px;}
+.about h2{font-size:1.7rem;margin-bottom:16px;}
+.about p{color:var(--text-dim);line-height:1.75;margin:0 0 14px;font-size:.96rem;}
+.about strong{color:var(--text);}
+
+footer{padding:50px 0 30px;border-top:1px solid var(--border);}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px;padding-bottom:36px;}
+.footer-brand .brand-name{display:block;margin-bottom:10px;}
+.footer-brand p{color:var(--text-dim);font-size:.85rem;line-height:1.6;max-width:32ch;}
+.footer-col h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);margin:0 0 12px;}
+.footer-col a,.footer-col span{display:block;font-size:.87rem;margin-bottom:9px;color:var(--text);cursor:pointer;transition:color .2s ease;}
+.footer-col a:hover{color:var(--accent);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.8rem;color:var(--text-dim);}
+
+.ad-slot{display:flex;justify-content:center;align-items:center;margin:34px auto;min-height:60px;}
+.ad-slot-label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);text-align:center;margin-bottom:8px;}
+
+@media (max-width:820px){
+.about-inner{grid-template-columns:1fr;text-align:center;}
+.about-logo{order:-1;}
+.article-grid{grid-template-columns:1fr;}
+.footer-grid{grid-template-columns:1fr 1fr;}
+.guide-table{font-size:.82rem;}
+.guide-table th,.guide-table td{padding:8px 10px;}
+}
+</style>
+</head>
+<body class="accent-gold density-comfy" oncontextmenu="return false;">
+
+<div class="blob blob-a"></div>
+<div class="blob blob-b"></div>
+<div class="blob blob-c"></div>
+<div class="overlay" id="overlay"></div>
+
+<!-- ====== SVG LOGO (reutilizado) ====== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="planetGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <symbol id="logo-senior" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="54" rx="46" ry="9" fill="none" stroke="#0a0a0a" stroke-width="4" transform="rotate(-22 50 52)" opacity=".45"/>
+      <circle cx="50" cy="50" r="28" fill="url(#planetGrad)"/>
+      <path d="M4 66 Q50 44 96 40" stroke="#0a0a0a" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ====== DRAWER ====== -->
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-inner">
+    <div class="drawer-head">
+      <strong>Menu</strong>
+      <button class="close-btn" id="closeDrawer" aria-label="Fechar menu">✕</button>
+    </div>
+
+    <div class="drawer-group">
+      <h4>Navegar</h4>
+      <div class="drawer-link" data-screen="inicio">Início</div>
+      <div class="drawer-link" data-screen="artigos">Artigos</div>
+      <div class="drawer-link" data-screen="guia">📖 Guia de Programação</div>
+      <div class="drawer-link" data-screen="sobre">Sobre</div>
+    </div>
+
+    <div class="drawer-group">
+      <h4>Aparência</h4>
+      <div class="drawer-row">
+        <div class="theme-option active" data-theme="clean"><span class="swatch mini-clean"></span> Minimalista</div>
+        <div class="theme-option" data-theme="glass"><span class="swatch mini-glass"></span> Liquid Glass</div>
+      </div>
+    </div>
+
+    <div class="drawer-group">
+      <h4>Personalização</h4>
+      <div class="drawer-row">
+        <span class="drawer-label">Cor de destaque</span>
+        <div class="swatch-row">
+          <button class="swatch-btn sw-gold active" data-accent="gold" aria-label="Dourado"></button>
+          <button class="swatch-btn sw-blue" data-accent="blue" aria-label="Azul"></button>
+          <button class="swatch-btn sw-green" data-accent="green" aria-label="Verde"></button>
+          <button class="swatch-btn sw-purple" data-accent="purple" aria-label="Roxo"></button>
+          <button class="swatch-btn sw-pink" data-accent="pink" aria-label="Rosa"></button>
+        </div>
+      </div>
+      <div class="drawer-row">
+        <span class="drawer-label">Tamanho da fonte</span>
+        <div class="pill-row">
+          <button class="pill" data-fs="sm">Pequena</button>
+          <button class="pill active" data-fs="md">Média</button>
+          <button class="pill" data-fs="lg">Grande</button>
+        </div>
+      </div>
+      <div class="drawer-row">
+        <span class="drawer-label">Densidade</span>
+        <div class="pill-row">
+          <button class="pill" data-density="compact">Compacto</button>
+          <button class="pill active" data-density="comfy">Confortável</button>
+          <button class="pill" data-density="spacious">Espaçoso</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button class="icon-btn" id="contactBtn" aria-label="Contacto">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="m22 6-10 7L2 6"></path></svg>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- ====== HEADER ====== -->
+<header>
+  <div class="wrap header-row">
+    <div class="brand" id="brandHome">
+      <svg><use href="#logo-senior"/></svg>
+      <span class="brand-name">Sé<em>nior</em></span>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menu"><span></span></button>
+  </div>
+</header>
+
+<!-- ====== TELA: INÍCIO ====== -->
+<main id="screen-inicio" class="screen active">
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">POR INYLUAR</div>
+      <h1>Do júnior ao sénior, um artigo de cada vez</h1>
+      <p>Sénior é onde reunimos ideias sobre programação, carreira e arquitetura de software — pensadas para quem quer parar de copiar soluções e começar a entendê-las.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-screen="artigos">Ler os artigos</button>
+        <button class="btn btn-ghost" data-screen="guia">📖 Guia de Programação</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat-section">
+    <div class="wrap">
+      <div class="cat-heading">
+        <div class="eyebrow">EXPLORAR POR TEMA</div>
+        <h2>Categorias</h2>
+      </div>
+      <div class="cat-row" id="catRow"></div>
+    </div>
+  </section>
+
+  <section class="articles">
+    <div class="wrap"><div class="article-grid" id="articleGrid"></div></div>
+  </section>
+</main>
+
+<!-- ====== TELA: ARTIGOS ====== -->
+<main id="screen-artigos" class="screen">
+  <section class="cat-section">
+    <div class="wrap">
+      <div class="cat-heading">
+        <div class="eyebrow">TODOS OS ARTIGOS</div>
+        <h2>Artigos</h2>
+      </div>
+      <div class="cat-row" id="catRowFull"></div>
+    </div>
+  </section>
+  <section class="articles">
+    <div class="wrap">
+      <div class="article-grid" id="articleGridFull"></div>
+
+      <!-- Adsterra: Native Banner -->
+      <div class="ad-slot">
+        <div>
+          <div class="ad-slot-label">Publicidade</div>
+          <div id="container-065f35d95257afc24159a76c52361e3a"></div>
+          <script async="async" data-cfasync="false" src="https://pl31644032.profitableratecpmnetwork.com/065f35d95257afc24159a76c52361e3a/invoke.js"></script>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ====== TELA: GUIA ====== -->
+<main id="screen-guia" class="screen">
+  <section class="guide-hero">
+    <div class="wrap">
+      <div class="eyebrow">PROGRAMAR AO LUAR</div>
+      <h1>Guia de Programação</h1>
+      <p>Comandos, explicações e exemplos completos das quatro linguagens essenciais — HTML, Python, Lua e JavaScript — escritos de forma clara e direta.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="guide-tabs" id="guideTabs">
+      <button class="active" data-guide="html">HTML</button>
+      <button data-guide="python">Python</button>
+      <button data-guide="lua">Lua</button>
+      <button data-guide="js">JavaScript</button>
+      <button data-guide="resumo">Comparativo</button>
+    </div>
+
+    <div class="guide-body">
+
+      <!-- HTML -->
+      <section class="guide-panel active" data-panel="html">
+        <h2>1. HTML — a estrutura das páginas</h2>
+        <p><strong>HTML</strong> (HyperText Markup Language) não é uma linguagem de programação — é uma linguagem de <strong>marcação</strong>. Escreves etiquetas (tags) à volta do conteúdo para dizer ao navegador o que cada coisa é.</p>
+        <p>Cada tag abre e fecha: <code>&lt;p&gt;texto&lt;/p&gt;</code>. Algumas não fecham: <code>&lt;br&gt;</code> e <code>&lt;img&gt;</code>.</p>
+
+        <h3>Comandos principais</h3>
+        <table class="guide-table">
+          <tr><th>Comando</th><th>Para que serve</th></tr>
+          <tr><td>&lt;!DOCTYPE html&gt;</td><td>Diz ao navegador que o documento usa HTML5. Sempre na primeira linha.</td></tr>
+          <tr><td>&lt;html&gt;</td><td>Envolve toda a página.</td></tr>
+          <tr><td>&lt;head&gt;</td><td>Zona de informação: título da aba, codificação, CSS.</td></tr>
+          <tr><td>&lt;title&gt;</td><td>Texto que aparece no separador do navegador.</td></tr>
+          <tr><td>&lt;body&gt;</td><td>Tudo o que aparece visível na página.</td></tr>
+          <tr><td>&lt;h1&gt;…&lt;h6&gt;</td><td>Títulos. &lt;h1&gt; é o maior, &lt;h6&gt; o menor.</td></tr>
+          <tr><td>&lt;p&gt;</td><td>Parágrafo de texto.</td></tr>
+          <tr><td>&lt;b&gt; / &lt;i&gt; / &lt;u&gt;</td><td>Negrito / itálico / sublinhado.</td></tr>
+          <tr><td>&lt;br&gt;</td><td>Quebra de linha.</td></tr>
+          <tr><td>&lt;hr&gt;</td><td>Linha horizontal a separar conteúdo.</td></tr>
+          <tr><td>&lt;a href="..."&gt;</td><td>Cria um link.</td></tr>
+          <tr><td>&lt;img src="..."&gt;</td><td>Insere uma imagem.</td></tr>
+          <tr><td>&lt;ul&gt; / &lt;ol&gt; / &lt;li&gt;</td><td>Lista com pontos / numerada / item da lista.</td></tr>
+          <tr><td>&lt;div&gt; / &lt;span&gt;</td><td>Caixa de bloco / pedaço pequeno em linha.</td></tr>
+          <tr><td>&lt;table&gt; &lt;tr&gt; &lt;td&gt;</td><td>Tabela, linha e célula.</td></tr>
+          <tr><td>&lt;form&gt; &lt;input&gt; &lt;button&gt;</td><td>Formulário, caixa de texto, botão.</td></tr>
+          <tr><td>&lt;style&gt;</td><td>Escreve CSS dentro da página.</td></tr>
+          <tr><td>&lt;!-- … --&gt;</td><td>Comentário (não aparece).</td></tr>
+        </table>
+
+        <h3>Exemplo completo — site com estilo</h3>
+<div class="guide-code"><span class="c">&lt;!-- guarda como index.html e abre no navegador --&gt;</span>
+<span class="k">&lt;!DOCTYPE html&gt;</span>
+<span class="k">&lt;html&gt;</span>
+<span class="k">&lt;head&gt;</span>
+  <span class="k">&lt;title&gt;</span>Loja do João<span class="k">&lt;/title&gt;</span>
+  <span class="k">&lt;meta</span> charset=<span class="s">"UTF-8"</span><span class="k">&gt;</span>
+  <span class="k">&lt;style&gt;</span>
+    body { font-family: Arial; background: #f4f4f4; margin: 0; }
+    .topo { background: #1E2761; color: white; padding: 20px; }
+    .caixa { background: white; padding: 15px; margin: 15px; border-radius: 8px; }
+    table { border-collapse: collapse; }
+    td, th { border: 1px solid #ccc; padding: 6px 12px; }
+  <span class="k">&lt;/style&gt;</span>
+<span class="k">&lt;/head&gt;</span>
+<span class="k">&lt;body&gt;</span>
+  <span class="k">&lt;div</span> class=<span class="s">"topo"</span><span class="k">&gt;</span>
+    <span class="k">&lt;h1&gt;</span>Loja do João<span class="k">&lt;/h1&gt;</span>
+    <span class="k">&lt;p&gt;</span>Produtos frescos todos os dias<span class="k">&lt;/p&gt;</span>
+  <span class="k">&lt;/div&gt;</span>
+  <span class="k">&lt;div</span> class=<span class="s">"caixa"</span><span class="k">&gt;</span>
+    <span class="k">&lt;h2&gt;</span>Preços<span class="k">&lt;/h2&gt;</span>
+    <span class="k">&lt;table&gt;</span>
+      <span class="k">&lt;tr&gt;&lt;th&gt;</span>Produto<span class="k">&lt;/th&gt;&lt;th&gt;</span>Preço<span class="k">&lt;/th&gt;&lt;/tr&gt;</span>
+      <span class="k">&lt;tr&gt;&lt;td&gt;</span>Arroz 1kg<span class="k">&lt;/td&gt;&lt;td&gt;</span>120 MT<span class="k">&lt;/td&gt;&lt;/tr&gt;</span>
+      <span class="k">&lt;tr&gt;&lt;td&gt;</span>Óleo 1L<span class="k">&lt;/td&gt;&lt;td&gt;</span>180 MT<span class="k">&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="k">&lt;/table&gt;</span>
+  <span class="k">&lt;/div&gt;</span>
+<span class="k">&lt;/body&gt;</span>
+<span class="k">&lt;/html&gt;</span></div>
+        <div class="guide-tip"><strong>Dica:</strong> guarda o ficheiro como <code>index.html</code> e abre com duplo clique — abre logo no navegador. Não precisas de instalar nada.</div>
+      </section>
+
+      <!-- PYTHON -->
+      <section class="guide-panel" data-panel="python">
+        <h2>2. Python — ordens ao computador</h2>
+        <p>Python é uma linguagem de programação <strong>a sério</strong>: calcula, decide, repete e guarda informação. Não usa chavetas — a organização é feita por <strong>indentação</strong> (os espaços no início da linha).</p>
+
+        <h3>Comandos principais</h3>
+        <table class="guide-table">
+          <tr><th>Comando</th><th>Para que serve</th></tr>
+          <tr><td>print("olá")</td><td>Escreve texto ou valores no ecrã.</td></tr>
+          <tr><td>nome = "João"</td><td>Cria uma variável.</td></tr>
+          <tr><td>input("Nome: ")</td><td>Pergunta algo ao utilizador.</td></tr>
+          <tr><td>int() / float() / str()</td><td>Converte para inteiro, decimal ou texto.</td></tr>
+          <tr><td>if / elif / else</td><td>Toma decisões.</td></tr>
+          <tr><td>for x in range(5):</td><td>Repete N vezes.</td></tr>
+          <tr><td>while cond:</td><td>Repete enquanto a condição for verdadeira.</td></tr>
+          <tr><td>break / continue</td><td>Sai do ciclo / salta para a próxima.</td></tr>
+          <tr><td>def funcao():</td><td>Cria uma função.</td></tr>
+          <tr><td>return valor</td><td>Devolve um resultado da função.</td></tr>
+          <tr><td>lista = [1, 2, 3]</td><td>Lista de valores.</td></tr>
+          <tr><td>lista.append(4)</td><td>Acrescenta ao fim.</td></tr>
+          <tr><td>len(lista)</td><td>Quantos elementos tem.</td></tr>
+          <tr><td>dic = {"a": 1}</td><td>Dicionário chave/valor.</td></tr>
+          <tr><td>import math</td><td>Traz bibliotecas extra.</td></tr>
+          <tr><td>open("f.txt", "w")</td><td>Abre ficheiro para ler (r) ou escrever (w).</td></tr>
+          <tr><td>try / except</td><td>Tenta executar e apanha o erro.</td></tr>
+        </table>
+
+        <h3>Exemplo — programa da mercearia</h3>
+<div class="guide-code"><span class="c"># --- Programa da mercearia ---</span>
+print(<span class="s">"== MERCEARIA DO JOÃO =="</span>)
+precos = {<span class="s">"arroz"</span>: 120, <span class="s">"oleo"</span>: 180, <span class="s">"acucar"</span>: 95}
+carrinho = []
+
+nome = input(<span class="s">"Qual é o seu nome? "</span>)
+print(<span class="s">"Bem-vindo,"</span>, nome)
+
+<span class="k">while</span> True:
+    print(<span class="s">"\nProdutos disponíveis:"</span>)
+    <span class="k">for</span> produto, preco <span class="k">in</span> precos.items():
+        print(<span class="s">"- "</span>, produto, <span class="s">"="</span>, preco, <span class="s">"MT"</span>)
+
+    escolha = input(<span class="s">"Escreva o produto (ou 'fim'): "</span>)
+    <span class="k">if</span> escolha == <span class="s">"fim"</span>:
+        <span class="k">break</span>
+    <span class="k">elif</span> escolha <span class="k">in</span> precos:
+        quantidade = int(input(<span class="s">"Quantas unidades? "</span>))
+        carrinho.append((escolha, quantidade, precos[escolha] * quantidade))
+        print(<span class="s">"Adicionado!"</span>)
+    <span class="k">else</span>:
+        print(<span class="s">"Esse produto não existe."</span>)
+
+total = 0
+print(<span class="s">"\n===== FACTURA ====="</span>)
+<span class="k">for</span> item, qtd, subtotal <span class="k">in</span> carrinho:
+    print(item, <span class="s">"x"</span>, qtd, <span class="s">"="</span>, subtotal, <span class="s">"MT"</span>)
+    total = total + subtotal
+print(<span class="s">"TOTAL: "</span>, total, <span class="s">"MT"</span>)</div>
+        <div class="guide-tip"><strong>Dica:</strong> a indentação (4 espaços) não é decoração — define o que está dentro do <code>if</code>, <code>for</code> ou função.</div>
+      </section>
+
+      <!-- LUA -->
+      <section class="guide-panel" data-panel="lua">
+        <h2>3. Lua — leve, rápida, usada em jogos</h2>
+        <p>Lua é pequena e muito rápida. Usada em <strong>Roblox</strong>, World of Warcraft, sistemas embebidos. Os blocos abrem com uma palavra e fecham sempre com <code>end</code>.</p>
+
+        <h3>Comandos principais</h3>
+        <table class="guide-table">
+          <tr><th>Comando</th><th>Para que serve</th></tr>
+          <tr><td>print("olá")</td><td>Mostra texto no ecrã.</td></tr>
+          <tr><td>local nome = "João"</td><td>Cria uma variável local (recomendado).</td></tr>
+          <tr><td>io.read()</td><td>Lê o que o utilizador escreve.</td></tr>
+          <tr><td>tonumber() / tostring()</td><td>Converte texto ↔ número.</td></tr>
+          <tr><td>..</td><td>Junta (concatena) dois textos.</td></tr>
+          <tr><td>if … then … end</td><td>Decisão (usa elseif / else).</td></tr>
+          <tr><td>for i = 1, 10 do … end</td><td>Repete de 1 até 10.</td></tr>
+          <tr><td>while cond do … end</td><td>Repete enquanto verdadeiro.</td></tr>
+          <tr><td>repeat … until cond</td><td>Repete até a condição ser verdadeira.</td></tr>
+          <tr><td>function nome() … end</td><td>Cria uma função.</td></tr>
+          <tr><td>tabela = {1, 2, 3}</td><td>Tabela (lista) — começa no índice 1.</td></tr>
+          <tr><td>ipairs(tabela)</td><td>Percorre índices e valores.</td></tr>
+        </table>
+
+        <h3>Exemplo — jogo de adivinhar o número</h3>
+<div class="guide-code"><span class="c">-- Jogo: adivinha o número secreto</span>
+math.randomseed(os.time())
+<span class="k">local</span> secreto = math.random(<span class="n">1</span>, <span class="n">100</span>)
+<span class="k">local</span> tentativas = <span class="n">0</span>
+
+print(<span class="s">"=== JOGO DA ADIVINHA ==="</span>)
+io.write(<span class="s">"Como te chamas? "</span>)
+<span class="k">local</span> nome = io.read()
+print(<span class="s">"Boa sorte, "</span> .. nome .. <span class="s">"! Pensei num número de 1 a 100."</span>)
+
+<span class="k">local</span> palpite
+<span class="k">repeat</span>
+    io.write(<span class="s">"O teu palpite: "</span>)
+    palpite = tonumber(io.read())
+    tentativas = tentativas + <span class="n">1</span>
+
+    <span class="k">if</span> palpite == <span class="k">nil</span> <span class="k">then</span>
+        print(<span class="s">"Isso não é um número!"</span>)
+    <span class="k">elseif</span> palpite &lt; secreto <span class="k">then</span>
+        print(<span class="s">"Muito baixo!"</span>)
+    <span class="k">elseif</span> palpite &gt; secreto <span class="k">then</span>
+        print(<span class="s">"Muito alto!"</span>)
+    <span class="k">else</span>
+        print(<span class="s">"Acertaste em "</span> .. tentativas .. <span class="s">" tentativas!"</span>)
+    <span class="k">end</span>
+<span class="k">until</span> palpite == secreto</div>
+        <div class="guide-tip"><strong>Dica:</strong> esquecer o <code>end</code> é o erro mais comum em Lua. Conta sempre quantos blocos abriste.</div>
+      </section>
+
+      <!-- JAVASCRIPT -->
+      <section class="guide-panel" data-panel="js">
+        <h2>4. JavaScript — dar vida às páginas</h2>
+        <p>Se o HTML é o esqueleto, o JavaScript é o <strong>músculo</strong>: faz o botão funcionar, valida formulários, muda textos sem recarregar a página e cria animações.</p>
+
+        <h3>Comandos principais</h3>
+        <table class="guide-table">
+          <tr><th>Comando</th><th>Para que serve</th></tr>
+          <tr><td>console.log(x)</td><td>Mostra na consola do navegador (F12).</td></tr>
+          <tr><td>let x = 5;</td><td>Variável que pode mudar.</td></tr>
+          <tr><td>const PI = 3.14;</td><td>Valor fixo.</td></tr>
+          <tr><td>alert("olá")</td><td>Janela de aviso.</td></tr>
+          <tr><td>prompt("Nome?")</td><td>Pede um valor.</td></tr>
+          <tr><td>if / else if / else</td><td>Decisões.</td></tr>
+          <tr><td>for (let i=0; i&lt;n; i++)</td><td>Repete N vezes.</td></tr>
+          <tr><td>while (cond) { }</td><td>Repete enquanto verdade.</td></tr>
+          <tr><td>function nome() { }</td><td>Cria uma função.</td></tr>
+          <tr><td>const f = () =&gt; { }</td><td>Arrow function (curta).</td></tr>
+          <tr><td>let a = [1,2,3];</td><td>Array.</td></tr>
+          <tr><td>a.push(4) / a.length</td><td>Acrescenta / conta elementos.</td></tr>
+          <tr><td>let o = {nome: "Ana"}</td><td>Objecto com propriedades.</td></tr>
+          <tr><td>document.getElementById()</td><td>Apanha um elemento pelo id.</td></tr>
+          <tr><td>el.innerHTML = "..."</td><td>Muda o conteúdo.</td></tr>
+          <tr><td>el.style.color</td><td>Altera estilo pelo código.</td></tr>
+          <tr><td>el.addEventListener("click", f)</td><td>Executa f no clique.</td></tr>
+          <tr><td>setTimeout(f, 1000)</td><td>Executa f após 1 segundo.</td></tr>
+          <tr><td>fetch(url)</td><td>Vai buscar dados a um servidor.</td></tr>
+        </table>
+
+        <h3>Exemplo — calculadora de gorjeta</h3>
+<div class="guide-code"><span class="k">&lt;!DOCTYPE html&gt;</span>
+<span class="k">&lt;html&gt;&lt;head&gt;</span>
+<span class="k">&lt;title&gt;</span>Calculadora de Gorjeta<span class="k">&lt;/title&gt;</span>
+<span class="k">&lt;style&gt;</span>
+  body { font-family: Arial; background:#eef2f7; padding:30px; }
+  .cartao { background:#fff; max-width:340px; padding:20px; border-radius:10px; }
+  input, button { padding:8px; width:100%; margin-top:8px; }
+  button { background:#1E2761; color:#fff; border:none; cursor:pointer; }
+<span class="k">&lt;/style&gt;&lt;/head&gt;&lt;body&gt;</span>
+<span class="k">&lt;div</span> class=<span class="s">"cartao"</span><span class="k">&gt;</span>
+  <span class="k">&lt;h1&gt;</span>Calculadora de Gorjeta<span class="k">&lt;/h1&gt;</span>
+  <span class="k">&lt;input</span> type=<span class="s">"number"</span> id=<span class="s">"conta"</span> placeholder=<span class="s">"Ex: 500"</span><span class="k">&gt;</span>
+  <span class="k">&lt;button</span> id=<span class="s">"botao"</span><span class="k">&gt;</span>Calcular<span class="k">&lt;/button&gt;</span>
+  <span class="k">&lt;h2</span> id=<span class="s">"resultado"</span><span class="k">&gt;&lt;/h2&gt;</span>
+<span class="k">&lt;/div&gt;</span>
+<span class="k">&lt;script&gt;</span>
+  const botao = document.getElementById(<span class="s">"botao"</span>);
+
+  <span class="k">function</span> calcular() {
+    let valor = Number(document.getElementById(<span class="s">"conta"</span>).value);
+    <span class="k">if</span> (valor &lt;= <span class="n">0</span> || isNaN(valor)) {
+      document.getElementById(<span class="s">"resultado"</span>).innerHTML = <span class="s">"Valor inválido!"</span>;
+      <span class="k">return</span>;
+    }
+    const gorjeta = valor * <span class="n">0.10</span>;
+    const total = valor + gorjeta;
+    document.getElementById(<span class="s">"resultado"</span>).innerHTML =
+      <span class="s">"Gorjeta: "</span> + gorjeta.toFixed(<span class="n">2</span>) + <span class="s">"MT&lt;br&gt;Total: "</span> + total.toFixed(<span class="n">2</span>) + <span class="s">"MT"</span>;
+    document.getElementById(<span class="s">"resultado"</span>).style.color = <span class="s">"green"</span>;
+  }
+  botao.addEventListener(<span class="s">"click"</span>, calcular);
+<span class="k">&lt;/script&gt;</span>
+<span class="k">&lt;/body&gt;&lt;/html&gt;</span></div>
+        <div class="guide-tip"><strong>Dica:</strong> abre a consola do navegador com <code>F12</code> para ver os <code>console.log()</code> e erros.</div>
+      </section>
+
+      <!-- RESUMO -->
+      <section class="guide-panel" data-panel="resumo">
+        <h2>5. Resumo comparativo</h2>
+
+        <h3>Mostrar uma mensagem</h3>
+        <table class="guide-table">
+          <tr><th>Linguagem</th><th>Código</th></tr>
+          <tr><td>HTML</td><td>&lt;p&gt;Olá mundo&lt;/p&gt;</td></tr>
+          <tr><td>Python</td><td>print("Olá mundo")</td></tr>
+          <tr><td>Lua</td><td>print("Olá mundo")</td></tr>
+          <tr><td>JavaScript</td><td>console.log("Olá mundo");</td></tr>
+        </table>
+
+        <h3>Repetir 3 vezes</h3>
+<div class="guide-code"><span class="c"># Python</span>
+<span class="k">for</span> i <span class="k">in</span> range(3):
+    print(i)
+
+<span class="c">-- Lua</span>
+<span class="k">for</span> i = 1, 3 <span class="k">do</span>
+    print(i)
+<span class="k">end</span>
+
+<span class="c">// JavaScript</span>
+<span class="k">for</span> (<span class="k">let</span> i = 0; i &lt; 3; i++) {
+    console.log(i);
+}</div>
+
+        <h3>Tomar uma decisão</h3>
+<div class="guide-code"><span class="c"># Python</span>
+<span class="k">if</span> idade &gt;= 18:
+    print(<span class="s">"Adulto"</span>)
+<span class="k">else</span>:
+    print(<span class="s">"Menor"</span>)
+
+<span class="c">-- Lua</span>
+<span class="k">if</span> idade &gt;= 18 <span class="k">then</span>
+    print(<span class="s">"Adulto"</span>)
+<span class="k">else</span>
+    print(<span class="s">"Menor"</span>)
+<span class="k">end</span>
+
+<span class="c">// JavaScript</span>
+<span class="k">if</span> (idade &gt;= 18) {
+    console.log(<span class="s">"Adulto"</span>);
+} <span class="k">else</span> {
+    console.log(<span class="s">"Menor"</span>);
+}</div>
+
+        <h3>Diferenças que deves memorizar</h3>
+        <ul>
+          <li><strong>HTML</strong> não tem lógica — só estrutura o conteúdo.</li>
+          <li><strong>Python</strong> organiza blocos por indentação, sem ponto e vírgula.</li>
+          <li><strong>Lua</strong> fecha todos os blocos com <code>end</code> e junta textos com <code>..</code></li>
+          <li><strong>JavaScript</strong> usa chavetas <code>{ }</code> e ponto e vírgula <code>;</code></li>
+          <li>Em <strong>Lua</strong> as tabelas começam no índice 1; em <strong>Python</strong> e <strong>JS</strong> no 0.</li>
+        </ul>
+
+        <h3>Como praticar</h3>
+        <ul>
+          <li><strong>HTML e JS:</strong> cria um ficheiro <code>.html</code> no bloco de notas e abre no navegador.</li>
+          <li><strong>Python:</strong> instala o Python e escreve ficheiros <code>.py</code>, ou usa um editor online.</li>
+          <li><strong>Lua:</strong> usa um interpretador Lua ou o editor do Roblox Studio.</li>
+          <li><strong>Regra de ouro:</strong> escreve o código à mão em vez de copiar. Erra, lê o erro e corrige — é assim que se aprende.</li>
+        </ul>
+        <div class="guide-tip"><strong>♦ Fim do guia</strong> — bons estudos, Luar ♦</div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<!-- ====== TELA: SOBRE ====== -->
+<main id="screen-sobre" class="screen">
+  <section class="about">
+    <div class="wrap about-inner">
+      <div class="about-logo">
+        <svg><use href="#logo-senior"/></svg>
+      </div>
+      <div>
+        <h2>Sobre a Sénior</h2>
+        <p><strong>Sénior</strong> é o espaço de <strong>Inyluar</strong> para escrever sobre programação sem enrolação: fundamentos que aguentam o tempo, decisões de carreira e arquitetura de sistemas explicadas com exemplos reais.</p>
+        <p>O nome resume o objetivo do próprio conteúdo: ajudar quem programa a deixar de aplicar soluções de cor e passar a entender o porquê — o percurso de júnior a sénior, artigo a artigo.</p>
+        <p>Todo o conteúdo publicado aqui é original e de propriedade da Sénior.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adsterra: Banner 468x60 -->
+  <div class="wrap">
+    <div class="ad-slot">
+      <div style="text-align:center;">
+        <div class="ad-slot-label">Publicidade</div>
+        <div id="adsterra-banner-468x60"></div>
+        <script type="text/javascript">
+          atOptions = {
+            'key' : 'cddafb8b27aaf4bc57a8c785a2788340',
+            'format' : 'iframe',
+            'height' : 60,
+            'width' : 468,
+            'params' : {}
+          };
+        </script>
+        <script src="https://www.highrevenueformat.com/cddafb8b27aaf4bc57a8c785a2788340/invoke.js"></script>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand-name">Sé<em>nior</em></span>
+        <p>Do júnior ao sénior, um artigo de cada vez. Por Inyluar.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <a data-cat="lua">Lua</a>
+        <a data-cat="luar">Luar</a>
+        <a data-cat="syze">Syze</a>
+        <a data-cat="nyx">Nyx</a>
+        <a data-cat="orbe">Orbe</a>
+      </div>
+      <div class="footer-col">
+        <h4>Sénior</h4>
+        <a data-screen="inicio">Início</a>
+        <a data-screen="artigos">Artigos</a>
+        <a data-screen="guia">Guia</a>
+        <a data-screen="sobre">Sobre</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <span>Código fechado</span>
+        <span>© 2026 Sénior</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sénior. Todos os direitos reservados.</span>
+      <span>Escrito por Inyluar</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   Sénior — motor do site
+   © 2026 Sénior. Código fechado.
+   ============================================================ */
+(function(){
+'use strict';
+
+/* --- 1. PROTEÇÃO (dissuasor) --- */
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('keydown', function(e){
+  if(e.key === 'F12'){ e.preventDefault(); return false; }
+  if(e.ctrlKey && e.shiftKey && ['I','J','C','K'].indexOf(e.key) !== -1){ e.preventDefault(); return false; }
+  if(e.ctrlKey && (e.key === 'u' || e.key === 'U')){ e.preventDefault(); return false; }
+  if(e.ctrlKey && (e.key === 's' || e.key === 'S')){ e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', function(e){ if(e.target.tagName === 'IMG') e.preventDefault(); });
+try{
+  console.log('%c⚠ Sénior','color:#A9782E;font-size:22px;font-weight:bold;font-family:Georgia,serif;');
+  console.log('%cCódigo fechado — © 2026 Sénior · Inyluar.','color:#6B675F;font-size:12px;');
+}catch(_){}
+
+/* --- 2. DADOS --- */
+var ARTIGOS = [
+  { cat:'lua',  tag:'Lua · Fundamentos',  titulo:'Variáveis não são gavetas: o modelo mental que devias ter desde o início', desc:'Porque pensar em variáveis como "rótulos" em vez de "caixas" evita metade dos bugs de iniciante.', data:'22 SET', min:'6 min' },
+  { cat:'luar', tag:'Luar · Carreira',    titulo:'O que separa um júnior de um sénior não é a sintaxe', desc:'Sénior não é um nível de dificuldade de código — é a capacidade de prever consequências antes de escrever a primeira linha.', data:'19 SET', min:'7 min' },
+  { cat:'syze', tag:'Syze · Escala',      titulo:'O seu sistema não está lento, está mal medido', desc:'Antes de otimizar qualquer coisa, é preciso medir. Um raciocínio simples para achar o gargalo real.', data:'16 SET', min:'8 min' },
+  { cat:'nyx',  tag:'Nyx · Ferramentas',  titulo:'Git além do commit: o fluxo que a maioria nunca aprende', desc:'Rebase, cherry-pick e bisect deixam de ser mágicas obscuras quando se entende o que o Git guarda de verdade.', data:'12 SET', min:'6 min' },
+  { cat:'orbe', tag:'Orbe · Arquitetura', titulo:'Monólito primeiro: o conselho impopular que continua certo', desc:'Microserviços resolvem problemas de escala — e criam problemas de coordenação. Saber quando ainda não precisa de um.', data:'8 SET', min:'9 min' },
+  { cat:'lua',  tag:'Lua · Fundamentos',  titulo:'Async/await sem mistério: como esperar sem travar', desc:'Uma explicação direta de como promises e await funcionam por baixo do capô.', data:'4 SET', min:'7 min' },
+  { cat:'luar', tag:'Luar · Carreira',    titulo:'Ninguém lê o seu código sozinho — escreva para quem vem depois', desc:'Clean code não é sobre estética: é sobre poupar a memória de trabalho de quem lê depois, inclusive você mesmo.', data:'30 AGO', min:'5 min' },
+  { cat:'syze', tag:'Syze · Escala',      titulo:'Cache resolve tudo, até criar o problema seguinte', desc:'Um guia curto sobre quando cache ajuda de verdade e quando só esconde um design ruim.', data:'25 AGO', min:'6 min' },
+  { cat:'orbe', tag:'Orbe · Arquitetura', titulo:'Kotlin para quem vem do Java: o que muda na prática', desc:'Null safety, data classes e coroutines explicados com comparações lado a lado.', data:'19 AGO', min:'7 min' }
+];
+var CATEGORIAS = [
+  { id:'todos', nome:'Todos', sub:'' },
+  { id:'lua',   nome:'Lua',   sub:'fundamentos' },
+  { id:'luar',  nome:'Luar',  sub:'carreira' },
+  { id:'syze',  nome:'Syze',  sub:'escala' },
+  { id:'nyx',   nome:'Nyx',   sub:'ferramentas' },
+  { id:'orbe',  nome:'Orbe',  sub:'arquitetura' }
+];
+
+/* --- 3. RENDER --- */
+function cardHTML(a){
+  return '<article class="article-card" data-cat="'+a.cat+'">'
+    + '<span class="article-tag">'+a.tag+'</span>'
+    + '<h3>'+a.titulo+'</h3>'
+    + '<p>'+a.desc+'</p>'
+    + '<div class="article-meta"><span>'+a.data+'</span><span>·</span><span>'+a.min+'</span></div>'
+    + '</article>';
+}
+function renderCats(el){
+  el.innerHTML = CATEGORIAS.map(function(c){
+    return '<div class="cat-pill'+(c.id==='todos'?' active':'')+'" data-cat="'+c.id+'">'+c.nome+(c.sub?'<span>'+c.sub+'</span>':'')+'</div>';
+  }).join('');
+}
+function renderCards(el){
+  el.innerHTML = ARTIGOS.map(cardHTML).join('');
+}
+var gridHome = document.getElementById('articleGrid');
+var gridFull = document.getElementById('articleGridFull');
+renderCats(document.getElementById('catRow'));
+renderCats(document.getElementById('catRowFull'));
+renderCards(gridHome);
+renderCards(gridFull);
+
+/* --- 4. FILTRO --- */
+function filter(cat){
+  document.querySelectorAll('.cat-pill').forEach(function(p){
+    p.classList.toggle('active', p.dataset.cat === cat);
+  });
+  document.querySelectorAll('.article-card').forEach(function(c){
+    var show = (cat === 'todos') || (c.dataset.cat === cat);
+    c.classList.toggle('hidden-card', !show);
+  });
+}
+document.addEventListener('click', function(e){
+  var pill = e.target.closest('.cat-pill');
+  if(pill){ filter(pill.dataset.cat); }
+  var footCat = e.target.closest('.footer-col a[data-cat]');
+  if(footCat){ e.preventDefault(); filter(footCat.dataset.cat); navigate('artigos'); }
+});
+
+/* --- 5. ROUTER --- */
+var SCREENS = ['inicio','artigos','guia','sobre'];
+function navigate(name){
+  if(SCREENS.indexOf(name) === -1) name = 'inicio';
+  SCREENS.forEach(function(s){
+    var el = document.getElementById('screen-'+s);
+    if(el) el.classList.toggle('active', s === name);
+  });
+  if(history.replaceState) history.replaceState(null,'','#'+name);
+  else window.location.hash = name;
+  window.scrollTo({top:0, behavior:'smooth'});
+  hideDrawer();
+}
+document.addEventListener('click', function(e){
+  var t = e.target.closest('[data-screen]');
+  if(t){ e.preventDefault(); navigate(t.dataset.screen); }
+});
+document.getElementById('brandHome').addEventListener('click', function(){ navigate('inicio'); });
+window.addEventListener('hashchange', function(){
+  var h = location.hash.replace('#','');
+  if(SCREENS.indexOf(h) !== -1) navigate(h);
+});
+
+/* --- 6. DRAWER --- */
+var menuBtn  = document.getElementById('menuBtn');
+var drawer   = document.getElementById('drawer');
+var overlay  = document.getElementById('overlay');
+function openDrawer(){
+  drawer.classList.add('open'); overlay.classList.add('open');
+  menuBtn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false');
+}
+function hideDrawer(){
+  drawer.classList.remove('open'); overlay.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true');
+}
+menuBtn.addEventListener('click', function(e){
+  e.stopPropagation();
+  if(drawer.classList.contains('open')) hideDrawer(); else openDrawer();
+});
+document.getElementById('closeDrawer').addEventListener('click', hideDrawer);
+overlay.addEventListener('click', hideDrawer);
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hideDrawer(); });
+document.getElementById('contactBtn').addEventListener('click', function(){
+  window.location.href = 'mailto:inygujamo87@gmail.com';
+});
+
+/* --- 7. GUIA (abas) --- */
+document.getElementById('guideTabs').addEventListener('click', function(e){
+  var btn = e.target.closest('button[data-guide]');
+  if(!btn) return;
+  document.querySelectorAll('#guideTabs button').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.guide-panel').forEach(function(p){
+    p.classList.toggle('active', p.dataset.panel === btn.dataset.guide);
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+/* --- 8. PREFERÊNCIAS (persistência) --- */
+var PREF_KEY = 'senior.prefs.v2';
+function savePrefs(){
+  var prefs = {
+    accent: (document.body.className.match(/accent-(\w+)/)||[])[1] || 'gold',
+    density: (document.body.className.match(/density-(\w+)/)||[])[1] || 'comfy',
+    theme: document.body.classList.contains('theme-glass') ? 'glass' : 'clean',
+    fs: (document.documentElement.className.match(/fs-(\w+)/)||[])[1] || 'md'
+  };
+  try{ localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); }catch(_){}
+}
+function loadPrefs(){
+  var raw; try{ raw = localStorage.getItem(PREF_KEY); }catch(_){ return; }
+  if(!raw) return;
+  var p; try{ p = JSON.parse(raw); }catch(_){ return; }
+  if(p.theme === 'glass') document.body.classList.add('theme-glass');
+  if(p.accent){
+    document.body.classList.remove('accent-gold','accent-blue','accent-green','accent-purple','accent-pink');
+    document.body.classList.add('accent-'+p.accent);
+  }
+  if(p.density){
+    document.body.classList.remove('density-compact','density-comfy','density-spacious');
+    document.body.classList.add('density-'+p.density);
+  }
+  if(p.fs){
+    document.documentElement.classList.remove('fs-sm','fs-md','fs-lg');
+    document.documentElement.classList.add('fs-'+p.fs);
+  }
+  document.querySelectorAll('.theme-option').forEach(function(o){
+    o.classList.toggle('active', o.dataset.theme === (p.theme||'clean'));
+  });
+  document.querySelectorAll('.swatch-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.accent === (p.accent||'gold'));
+  });
+  document.querySelectorAll('[data-density]').forEach(function(b){
+    b.classList.toggle('active', b.dataset.density === (p.density||'comfy'));
+  });
+  document.querySelectorAll('[data-fs]').forEach(function(b){
+    b.classList.toggle('active', b.dataset.fs === (p.fs||'md'));
+  });
+}
+loadPrefs();
+
+document.querySelectorAll('.theme-option').forEach(function(opt){
+  opt.addEventListener('click', function(){
+    document.querySelectorAll('.theme-option').forEach(function(o){ o.classList.remove('active'); });
+    opt.classList.add('active');
+    document.body.classList.toggle('theme-glass', opt.dataset.theme === 'glass');
+    savePrefs();
+  });
+});
+document.querySelectorAll('.swatch-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.swatch-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.body.classList.remove('accent-gold','accent-blue','accent-green','accent-purple','accent-pink');
+    document.body.classList.add('accent-'+btn.dataset.accent);
+    savePrefs();
+  });
+});
+document.querySelectorAll('[data-fs]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('[data-fs]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.documentElement.classList.remove('fs-sm','fs-md','fs-lg');
+    document.documentElement.classList.add('fs-'+btn.dataset.fs);
+    savePrefs();
+  });
+});
+document.querySelectorAll('[data-density]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('[data-density]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.body.classList.remove('density-compact','density-comfy','density-spacious');
+    document.body.classList.add('density-'+btn.dataset.density);
+    savePrefs();
+  });
+});
+
+/* --- 9. ANÚNCIOS (Adsterra) --- */
+/* Zonas novas (Popunder + Social Bar). Smartlink continua removido. */
+/* Popunder — abre uma vez por sessão, em segundo plano */
+(function(){
+  try{
+    if(!sessionStorage.getItem('adsterra_pop_loaded')){
+      sessionStorage.setItem('adsterra_pop_loaded','1');
+      var s = document.createElement('script');
+      s.src = 'https://pl31747919.profitableratecpmnetwork.com/d1/c6/df/d1c6df12877702057ceb7248f32a592e.js';
+      document.body.appendChild(s);
+    }
+  }catch(_){}
+})();
+/* Social Bar — carrega uma vez, fixo na página */
+(function(){
+  var s = document.createElement('script');
+  s.src = 'https://pl31747920.profitableratecpmnetwork.com/68/b5/fe/68b5fefd7cc14a49d626d1a29f016dbf.js';
+  document.body.appendChild(s);
+})();
+
+/* --- 10. BOOT --- */
+var initial = location.hash.replace('#','');
+if(SCREENS.indexOf(initial) !== -1) navigate(initial);
+
+})();
+</script>
+</body>
+</html>
